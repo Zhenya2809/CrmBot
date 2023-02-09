@@ -224,7 +224,7 @@ public class ExecutionContext {
         try {
             myBot.execute(sendPhoto);
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -232,7 +232,7 @@ public class ExecutionContext {
         try {
             myBot.execute(sendPool);
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -347,7 +347,7 @@ public class ExecutionContext {
         headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
         Gson g = new Gson();
         String s1 = g.toJson(o);
-        HttpEntity<String> httpEntity = new HttpEntity<>(s1);
+        HttpEntity<String> httpEntity = new HttpEntity<>(s1,headers);
         return restTemplate.exchange(url, httpMethod, httpEntity, tClass);
 
     }

@@ -20,7 +20,7 @@ public class ChoseDoctor implements Appointment {
     public void execute(ExecutionContext executionContext, LocalStateForAppointment localStateForAppointment) throws IOException {
 
         String inputMessage = executionContext.getUpdate().getMessage().getText();
-        String url="";
+        String url="http://localhost:8085/api/v1/telegram/finddoctor/"+inputMessage;
         List<DoctorDto> doctorsBySpeciality = executionContext.sendListMEthod(HttpMethod.GET, url, new ParameterizedTypeReference<List<DoctorDto>>() {
         });
                 doctorsBySpeciality.forEach(e -> {

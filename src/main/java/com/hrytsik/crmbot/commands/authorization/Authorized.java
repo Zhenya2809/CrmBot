@@ -22,9 +22,9 @@ public class Authorized implements Registration {
         TelegramUserDto telegramUserDto = TelegramUserDto.getTelegramUserDtoWithTelegramUser(executionContext.getUser());
         executionContext.sendRequestWithJsonWithoutHeader(TelegramUserDto.class, telegramUserDto, HttpMethod.POST, "http://localhost:8085/api/v1/auth/createacc");
         Map<String, ChoseRole> map = new HashMap<>();
-        map.put("USER", new User());
-        map.put("ADMIN", new Admin());
-        map.put("DOCTOR", new Doctor());
+        map.put("ROLE_USER", new User());
+        map.put("ROLE_ADMIN", new Admin());
+        map.put("ROLE_DOCTOR", new Doctor());
         ChoseRole choseRole = map.get(role);
         if (choseRole == null) {
             throw new RuntimeException("fail to find by role");
