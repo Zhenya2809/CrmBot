@@ -1,4 +1,4 @@
-package com.hrytsik.crmbot.commands.user;
+package com.hrytsik.crmbot.commands.usercommands;
 
 
 
@@ -13,19 +13,18 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class Beauticians implements Command {
+public class Doctors implements Command {
+
 
     @Override
     public void doCommand(ExecutionContext executionContext) {
 
-
-        List<ReplyButton> replyButtonList = List.of(
-                new ReplyButton("Записаться к косметологу"),
+        List<ReplyButton> replyButtonList = List.of(new ReplyButton("Записаться к доктору"),
                 new ReplyButton("Специалисты"),
                 new ReplyButton("Услуги"),
                 new ReplyButton("Наш адрес"),
                 new ReplyButton("Главное меню"));
-        executionContext.buildReplyKeyboard("Вы можете задать все вопросы нашему администратору", replyButtonList);
+        executionContext.buildReplyKeyboard("Хотите записаться на прием?", replyButtonList);
         executionContext.setLocalState(null);
         executionContext.setGlobalState(null);
 
@@ -34,11 +33,11 @@ public class Beauticians implements Command {
 
     @Override
     public boolean shouldRunOnText(String text) {
-        return text.equals("Косметологи");
+        return text.equals("Доктора");
     }
 
     @Override
     public TelegramUser.botstate getGlobalState() {
-        return TelegramUser.botstate.BEAUTICIANS;
+        return TelegramUser.botstate.DOCTORS;
     }
 }

@@ -3,6 +3,7 @@ package com.hrytsik.crmbot;
 
 import com.hrytsik.crmbot.commands.Command;
 import com.hrytsik.crmbot.entity.TelegramUser;
+import com.hrytsik.crmbot.inlinequerry.InlineTelegramBot;
 import com.hrytsik.crmbot.service.impl.TelegramUserServiceImpl;
 import com.hrytsik.crmbot.service.TelegramUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,8 @@ import java.util.Optional;
 @Component
 public class MyBot extends TelegramLongPollingBot {
     @Autowired
+    private InlineTelegramBot inlineTelegramBot;
+    @Autowired
     private TelegramUserService userService;
     @Autowired
     public List<Command> commands;
@@ -50,10 +53,10 @@ public class MyBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         try {
-//            if (update.hasInlineQuery()) {
-//                inlineTelegramBot.handleIncomingInlineQuery(update.getInlineQuery(), this);
-//                System.out.println(" update query= " + update.getInlineQuery().getQuery());
-//            }
+            if (update.hasInlineQuery()) {
+                inlineTelegramBot.handleIncomingInlineQuery(update.getInlineQuery(), this);
+                log.info(" update query= " + update.getInlineQuery().getQuery());
+            }
             if ((update.hasMessage()) && (update.getMessage().hasContact())) {
                 String phoneNumber = update.getMessage().getContact().getPhoneNumber();
                 registerContactNumber(update, phoneNumber);

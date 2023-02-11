@@ -1,12 +1,10 @@
-package com.hrytsik.crmbot.commands.user;
+package com.hrytsik.crmbot.commands.usercommands;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.hrytsik.crmbot.ExecutionContext;
 import com.hrytsik.crmbot.commands.Command;
-import com.hrytsik.crmbot.entity.ReplyButton;
 import com.hrytsik.crmbot.entity.TelegramUser;
 import com.hrytsik.crmbot.entity.dto.AppointmentToDoctorDTO;
 import com.hrytsik.crmbot.service.TelegramUserService;
@@ -19,12 +17,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +42,7 @@ public class MyAppointments implements Command {
                 String authorizationToken = user.getAuthorizationToken();
                 HttpRequest request = HttpRequest.newBuilder()
                         .GET()
-                        .uri(URI.create("http://localhost:8085/api/v1/telegram/getAppointmentsToDoctor/273131568"))
+                        .uri(URI.create("http://localhost:8085/api/v1/telegram/getAppointmentsToDoctor/"+executionContext.getChatId()))
                         .setHeader("Authorization", authorizationToken)
                         .build();
 

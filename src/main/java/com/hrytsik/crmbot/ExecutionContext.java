@@ -11,11 +11,12 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendLocation;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -98,7 +99,7 @@ public class ExecutionContext {
 
         replyKeyboardMarkup.setSelective(true);
         replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(false);
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
         // Add it to the message
         message.setReplyMarkup(replyKeyboardMarkup);
@@ -107,7 +108,6 @@ public class ExecutionContext {
 
     public String printDateAndState() {
         Date date = new Date();
-        // Вывод текущей даты и cостояний
         return date + ":      GlobalState:  " + getGlobalState() + "   LocalState:  " + getLocalState();
     }
 
@@ -204,7 +204,7 @@ public class ExecutionContext {
         execute(sendLocation);
     }
 
-    public void execute(SendMessage message) {
+    public void execute(BotApiMethod<Message> message) {
         try {
             myBot.execute(message);
         } catch (Exception e) {
@@ -212,25 +212,10 @@ public class ExecutionContext {
         }
     }
 
-    public void execute(SendLocation location) {
-        try {
-            myBot.execute(location);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void execute(SendPhoto sendPhoto) {
         try {
             myBot.execute(sendPhoto);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void execute(SendPoll sendPool) {
-        try {
-            myBot.execute(sendPool);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -298,20 +283,6 @@ public class ExecutionContext {
             return response;
         }
         throw new RuntimeException();
-    }
-
-    public void getPatient() {
-        Optional<TelegramUser> user = telegramUserService.findTelegramUserByChatId(chatId);
-        if (user.isPresent()) {
-            TelegramUser telegramUser = user.get();
-            String firstName1 = telegramUser.getFirstName();
-            String lastName1 = telegramUser.getLastName();
-            String phone = telegramUser.getPhone();
-            String email = telegramUser.getEmail();
-            String role = telegramUser.getRole();
-
-        }
-
     }
 
     public <T> ResponseEntity<T> sendMethod(Class<T> tClass, HttpMethod methods, String url) throws IOException {

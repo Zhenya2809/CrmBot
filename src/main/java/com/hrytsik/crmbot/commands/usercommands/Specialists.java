@@ -1,4 +1,4 @@
-package com.hrytsik.crmbot.commands.user;
+package com.hrytsik.crmbot.commands.usercommands;
 
 
 

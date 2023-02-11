@@ -1,6 +1,7 @@
 package com.hrytsik.crmbot.service.impl;
 
 import com.hrytsik.crmbot.entity.TelegramUser;
+import com.hrytsik.crmbot.entity.dto.TelegramUserDto;
 import com.hrytsik.crmbot.repository.TelegramUserRepository;
 import com.hrytsik.crmbot.service.TelegramUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +41,20 @@ public class TelegramUserServiceImpl implements TelegramUserService {
     }
 
 
-
     @Override
     public void save(TelegramUser user) {
         telegramUsersRepository.save(user);
+    }
+
+    @Override
+    public List<TelegramUser> getAllUsersForAdmin(String lastName) {
+        List<TelegramUser> chatIdList = telegramUsersRepository.searchUser(lastName).stream().toList();
+
+        for (TelegramUser telegramUser : chatIdList) {
+            log.info(telegramUser.getPhone());
+        }
+
+        return chatIdList;
     }
 
     @Override

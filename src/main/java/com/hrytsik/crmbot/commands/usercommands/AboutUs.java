@@ -1,4 +1,4 @@
-package com.hrytsik.crmbot.commands.user;
+package com.hrytsik.crmbot.commands.usercommands;
 
 
 
@@ -17,7 +17,6 @@ import java.util.List;
 public class AboutUs implements Command {
     @Override
     public void doCommand(ExecutionContext executionContext) {
-
 
         List<InlineButton> inlineButtons = List.of(new InlineButton("Instagram", "https://instagram.com"), new InlineButton("Facebook", "https://facebook.com"));
         executionContext.buildInlineKeyboard("Возможно тебя заинтересует одна из наших соц. сетей?", inlineButtons);

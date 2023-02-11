@@ -59,6 +59,7 @@ public class TelegramUser {
         MY_APPOINTMENTS,
         SPECIALISTS,
         APPOINTMENT_TO_DOCTOR,
+        SEND_APPOINTMENT_FOR_TODAY
 
 
 
