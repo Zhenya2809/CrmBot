@@ -256,7 +256,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                com.example.tgwarbot.TgWarBotApplication
+                                com.hrytsik.crmbot.CrmBotApplication
                             </mainClass>
                         </manifest>
                     </archive>
