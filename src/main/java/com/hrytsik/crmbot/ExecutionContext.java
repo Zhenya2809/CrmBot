@@ -41,8 +41,7 @@ import java.util.*;
 @Slf4j
 @Component
 public class ExecutionContext {
-    private RestTemplate restTemplate = new RestTemplate();
-
+//    private RestTemplate restTemplate = new RestTemplate();
     private MyBot myBot;
     public TelegramUser.botstate GlobalState;
     private Long chatId;
